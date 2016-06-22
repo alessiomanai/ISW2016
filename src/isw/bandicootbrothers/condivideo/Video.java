@@ -17,6 +17,8 @@ public class Video
         this.durata = durata;
     }
 
+    public Video() {}
+
     public void play()
     {
         System.out.println("Stai guardando " + this.nome +
