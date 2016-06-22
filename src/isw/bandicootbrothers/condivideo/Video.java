@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Video
 {
-    private String nome; //nome del video
-    private String autore;
-    private int durata; //in secondi
+    public String nome; //nome del video
+    public String autore;
+    public int durata; //in secondi
 
     private boolean vietato = false;
 
@@ -16,18 +16,6 @@ public class Video
         this.autore = autore;
         this.durata = durata;
     }
-
-    /*Impostare controllo: questi comandi li potranno guardare solo il sistema e/o un admin
-    public boolean isVietato()
-    {
-        return vietato;
-    }
-
-    public void setVietato(boolean vietato)
-    {
-        this.vietato = vietato;
-    }
-    */
 
     public void play()
     {
