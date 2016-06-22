@@ -64,6 +64,11 @@ public class Utente
                 }
             }
         }
+        else
+        {
+            System.out.println("nessun video corrispondente alla ricerca!");
+            return;
+        }
     }
 
     //ArrayList<Video> cercaVideo(){};
