@@ -1,3 +1,5 @@
+package isw.bandicootbrothers.condivideo;
+
 import java.util.Scanner;
 
 public class LogIn
