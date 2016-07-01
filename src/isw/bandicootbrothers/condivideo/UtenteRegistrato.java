@@ -1,3 +1,6 @@
+package isw.bandicootbrothers.condivideo;
+
+
 public class UtenteRegistrato extends Utente
 {
     public UtenteRegistrato()

@@ -1,3 +1,6 @@
+package isw.bandicootbrothers.condivideo;
+
+
 import java.util.ArrayList;
 
 public class VideoSingleton {

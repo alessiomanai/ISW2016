@@ -1,3 +1,5 @@
+package isw.bandicootbrothers.condivideo;
+
 public class Commento
 {
     String testo;

@@ -1,6 +1,5 @@
-/**
- * Created by Luca on 30/06/2016.
- */
+package isw.bandicootbrothers.condivideo;
+
 public class VideoPlayer
 {
     public VideoPlayer() {}
