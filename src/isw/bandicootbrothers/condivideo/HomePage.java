@@ -38,6 +38,22 @@ public class HomePage
         LogIn lg = new LogIn();
         Utente user = lg.buildUtente();
 
+        if(user instanceof UtenteRegistrato)
+        {
+            System.out.println("Benvenuto " + user.nome + "! Sei un Utente Registrato");
+        }
+        else
+        {
+            if(user instanceof Admin)
+            {
+                System.out.println("Benvenuto " + user.nome + "! Sei un Admin");
+            }
+            else
+            {
+                System.out.println("Benvenuto ospite! Sei un tutente non registrato!");
+            }
+        }
+
         while(true)
         {
             System.out.println("\n|| ************ CONDIVIDEO ************ ||");
@@ -103,7 +119,6 @@ public class HomePage
                     {
                         System.out.println("Video commentato");
                     }
-
                 }
 
                 System.out.println("************ Condividi Video *************");
@@ -117,6 +132,7 @@ public class HomePage
                 if (scelta2.equals("S") || scelta2.equals("s"))
                 {
                     user.videoInteressato.condividiVideo();
+                    System.out.println("Video codiviso");
                 }
             }
         }

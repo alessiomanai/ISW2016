@@ -43,23 +43,6 @@ public class VideoSearcher
             }
         }
 
-        if(listavideo.size() > 0)
-        {
-            System.out.println("\nTrovati " + listavideo.size() + " video:");
-
-            int a = 0;
-
-            for(Video v : listavideo)
-            {
-                System.out.println("Video numero " + a + " - Nome:\t" + v.nome);
-                a++;
-            }
-        }
-        else
-        {
-            System.out.println("Nessun video corrispondente alla ricerca!");
-        }
-
         return listavideo.size();
     }
 

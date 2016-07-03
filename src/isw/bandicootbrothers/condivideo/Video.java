@@ -23,10 +23,7 @@ public class Video
 
     public Video() {}
 
-    public void condividiVideo()
-    {
-        System.out.println("Video codiviso");
-    }
+    public void condividiVideo() { }
 
     public boolean scriviCommento(Utente u)
     {

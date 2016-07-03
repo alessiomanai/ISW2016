@@ -9,21 +9,19 @@ public class LogIn
     public Utente buildUtente()
     {
         Scanner in = new Scanner(System.in);
-        System.out.println("Inserisci nome: ");
+        System.out.println("Nome: ");
         String nome = in.next();
-        System.out.println("\nInserisci password: ");
+        System.out.println("\nPassword: ");
         String password = in.next();
 
         for(Utente u : UtenteSingleton.getInstance().getUtenteList())
         {
             if(u.nome.equals(nome) && u.password.equals(password))
             {
-                System.out.println("Loggato come: " + u.nome);
                 return u;
             }
         }
 
-        System.out.println("Loggato come ospite");
         return new UtenteNonRegistrato();
 
     }
