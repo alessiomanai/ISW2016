@@ -34,8 +34,6 @@ public class Video
         {
             this.commenti.add(new Commento(u.nome + "ha inserito un commento", u));
 
-            System.out.println("Video commentato\n");
-
             return true;
         }
 
