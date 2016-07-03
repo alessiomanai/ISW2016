@@ -49,9 +49,28 @@ public class HomePage
 
             System.out.println("\n************ Riproduci Video *************");
 
+            System.out.println("\n>>>>>>>> Inizio Riproduzione Video <<<<<<<\n");
+
+            System.out.println("Stai guardando " + user.videoInteressato.nome +
+                    " pubblicato da " + user.videoInteressato.autore +
+                    "\nQuesto video ha una durata di " + user.videoInteressato.durata + " secondi");
+
             // Riproduzione Video
             VideoPlayer vp = new VideoPlayer();
-            vp.play(user.videoInteressato);
+            boolean safe = vp.play(user.videoInteressato);
+
+            if (safe){
+
+                System.out.println("Questo video ha dei contenuti espliciti:" +
+                        "\nNon è riproducibile da utenti minorenni e utenti non registrati");
+            }
+            else {
+
+                System.out.println("Questo video NON ha dei contenuti espliciti:" +
+                        "\nE' riproducibile da qualsiasi utente");
+            }
+
+            System.out.println("\n>>>>>>>>> Fine Riproduzione Video <<<<<<<<");
 
             System.out.println("\n************* Commenta Video *************");
 
@@ -61,8 +80,7 @@ public class HomePage
             Scanner in1 = new Scanner(System.in);
             String scelta1 = in1.next();
 
-            if(scelta1.equals("S") || scelta1.equals("s"))
-            {
+            if(scelta1.equals("S") || scelta1.equals("s")) {
                 user.videoInteressato.scriviCommento(user);
             }
 
