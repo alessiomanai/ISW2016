@@ -1,16 +1,12 @@
 package isw.bandicootbrothers.condivideo;
 
-
 import java.util.ArrayList;
 
+/*
+| SINGLETON che rappresenta il DB Video
+| Consiste in un ArrayList di Video
+*/
 public class VideoSingleton {
-    /*
-    | La clase VideoSongleton funge da DATABASE DEI VIDEO.
-    | Esso è rappresentato da una singleton accessibile da qualsiasi punto del programma.
-    | Tale singleton è un arrayList di Video.
-    |
-    | Il database è stato popolato a mano da un costrutto Factory.
-    */
 
     //Rendo la classe una singleton
     private static VideoSingleton singleton;
@@ -26,10 +22,7 @@ public class VideoSingleton {
         return singleton;
     }
 
-    //La factory popola l'array-database
-    private VideoSingleton() {
-
-    }
+    private VideoSingleton() { }
 
     public ArrayList<Video> getVideoList() {
         return videoList;

@@ -7,6 +7,7 @@ public class HomePage
 {
     public static void main(String [] args)
     {
+        //DB Utenti tramite la singleton UtenteSingleton
         UtenteSingleton.getInstance().getUtenteList().add(new UtenteRegistrato("Luca", "luca", 96));
         UtenteSingleton.getInstance().getUtenteList().add(new UtenteRegistrato("Emanuel", "emanuel", 17));
         UtenteSingleton.getInstance().getUtenteList().add(new UtenteRegistrato("Alessio", "alessio", 55));
@@ -15,6 +16,7 @@ public class HomePage
         UtenteSingleton.getInstance().getUtenteList().add(new Admin("Davide", "davide", 85));
         UtenteSingleton.getInstance().getUtenteList().add(new Admin("Andrea", "andrea", 29));
 
+        //DB Video tramite la singleton VideoSingleton
         VideoSingleton.getInstance().getVideoList().add(new Video("Acqua corrente",   "Alessio",  87));
         VideoSingleton.getInstance().getVideoList().add(new Video("Ma anche no",      "Emanuel",  121));
         VideoSingleton.getInstance().getVideoList().add(new Video("Mobbasta",         "Corrado",  56));
@@ -38,6 +40,7 @@ public class HomePage
         LogIn lg = new LogIn();
         Utente user = lg.buildUtente();
 
+        //Messaggio di benvenuto per l'utente
         if(user instanceof UtenteRegistrato)
         {
             System.out.println("Benvenuto " + user.nome + "! Sei un Utente Registrato");
@@ -54,18 +57,22 @@ public class HomePage
             }
         }
 
+        //Qui iniziano le azioni dell'utente
         while(true)
         {
             System.out.println("\n|| ************ CONDIVIDEO ************ ||");
             System.out.println("|| *************** Home *************** ||\n");
 
             System.out.println("************* Ricerca Video **************\n");
+
             // Ricerca Video
             VideoSearcher vs = new VideoSearcher();
             ArrayList<Video> listaVideo = vs.ricercaVideo();
 
+            // Se durante la ricerca sono stati trovati dei video, continuo, altrimenti si passa ad una nuova ricerca
             if(listaVideo.size() > 0)
             {
+                //Stampo una lita dei video che ho trovato
                 System.out.println("\nTrovati " + listaVideo.size() + " video:");
 
                 int a = 0;
@@ -76,63 +83,75 @@ public class HomePage
                     a++;
                 }
 
+                //Chiedo all'utente se interessa qualcuno dei video che ha trovato
                 System.out.println("\nTi interessa qualcuno di questi video? \n"+
                         "Inserisci il numero del video interessato o scrivi '-1' per tornare alla home");
 
                 user.videoInteressato = vs.sceltaVideo(listaVideo);
 
-                System.out.println("\n************ Riproduci Video *************");
-
-                System.out.println("\n>>>>>>>> Inizio Riproduzione Video <<<<<<<\n");
-
-                System.out.println("Stai guardando " + user.videoInteressato.nome +
-                        " pubblicato da " + user.videoInteressato.autore +
-                        "\nQuesto video ha una durata di " + user.videoInteressato.durata + " secondi");
-
-                // Riproduzione Video
-                VideoPlayer vp = new VideoPlayer();
-                boolean safe = vp.play(user.videoInteressato);
-
-                if (safe) {
-
-                    System.out.println("Questo video ha dei contenuti espliciti:" +
-                            "\nNon è riproducibile da utenti minorenni e utenti non registrati");
-                } else {
-
-                    System.out.println("Questo video NON ha dei contenuti espliciti:" +
-                            "\nE' riproducibile da qualsiasi utente");
-                }
-
-                System.out.println("\n>>>>>>>>> Fine Riproduzione Video <<<<<<<<");
-
-                System.out.println("\n************* Commenta Video *************");
-
-                // Commenta Video
-                System.out.println("\nVuoi commentare il video? S/N");
-
-                Scanner in1 = new Scanner(System.in);
-                String scelta1 = in1.next();
-
-                if (scelta1.equals("S") || scelta1.equals("s")) {
-
-                    if(user.videoInteressato.scriviCommento(user))
-                    {
-                        System.out.println("Video commentato");
-                    }
-                }
-
-                System.out.println("************ Condividi Video *************");
-
-                //Condividi Video
-                System.out.println("\nVuoi condividere il video? S/N");
-
-                Scanner in2 = new Scanner(System.in);
-                String scelta2 = in2.next();
-
-                if (scelta2.equals("S") || scelta2.equals("s"))
+                //Se l'utente ha selezionato un video, continuo, altrimenti passo ad una nuova ricerca
+                if(user.videoInteressato != null)
                 {
-                    user.videoInteressato.condividiVideo();
-                    System.out.println("Video codiviso");
+                    //Riproduzione video
+                    System.out.println("\n************ Riproduci Video *************");
+
+                    System.out.println("\n>>>>>>>> Inizio Riproduzione Video <<<<<<<\n");
+
+                    System.out.println("Stai guardando " + user.videoInteressato.nome +
+                            " pubblicato da " + user.videoInteressato.autore +
+                            "\nQuesto video ha una durata di " + user.videoInteressato.durata + " secondi");
+
+                    // Riproduzione Video
+                    VideoPlayer vp = new VideoPlayer();
+                    boolean safe = vp.play(user.videoInteressato);
+
+                    if (safe) {
+
+                        System.out.println("Questo video ha dei contenuti espliciti:" +
+                                "\nNon è riproducibile da utenti minorenni e utenti non registrati");
+                    } else {
+
+                        System.out.println("Questo video NON ha dei contenuti espliciti:" +
+                                "\nE' riproducibile da qualsiasi utente");
+                    }
+
+                    System.out.println("\n>>>>>>>>> Fine Riproduzione Video <<<<<<<<");
+
+                    // Commenta Video
+                    System.out.println("\n************* Commenta Video *************");
+
+                    //Chiedo all'utente se vuole commentare
+                    System.out.println("\nVuoi commentare il video? S/N");
+                    boolean vuoiCommentare = user.videoInteressato.vuoi();
+
+                    //Se vuole commentare, controllo se può
+                    if (vuoiCommentare)
+                    {
+                        if (user.videoInteressato.scriviCommento(user))
+                        {
+                            System.out.println("Video commentato\n");
+                        }
+                        else
+                        {
+                            System.out.println("Non sei un utente Registrato, non puoi commentare i video!\n");
+                        }
+                    }
+
+                    //Condividi video
+                    System.out.println("************ Condividi Video *************");
+
+                    //Chiedo all'utente se vuole commentare
+                    System.out.println("\nVuoi condividere il video? S/N");
+                    boolean vuoiCondividere = user.videoInteressato.vuoi();
+
+                    //Se vuole commentare, lo faccio commentare
+                    if (vuoiCondividere)
+                    {
+                        user.videoInteressato.condividiVideo();
+                        System.out.println("Video codiviso");
+                    }
+
+                    user.videoInteressato = null;
                 }
             }
         }

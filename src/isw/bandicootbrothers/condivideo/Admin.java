@@ -1,6 +1,5 @@
 package isw.bandicootbrothers.condivideo;
 
-
 import java.util.ArrayList;
 
 public class Admin extends UtenteRegistrato
@@ -39,10 +38,12 @@ public class Admin extends UtenteRegistrato
             if(user.nome.equals(u.nome))
             {
                 UtenteSingleton.getInstance().getUtenteList().remove(u);
+                //Se l'eliminazione dei dati dell'utente non è andata a buon fine, restituisco true.
                 return true;
             }
         }
 
+        //Se l'eliminazione dei dati dell'utente non è andata a buon fine, restituisco false.
         return false;
     }
 }

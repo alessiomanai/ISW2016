@@ -6,7 +6,6 @@ public class VideoPlayer
 
     public boolean play(Video v)
     {
-
         if(v.vietato)
         {
             return true;
@@ -15,6 +14,5 @@ public class VideoPlayer
         {
             return false;
         }
-
     }
 }
